@@ -1,0 +1,36 @@
+@import "../../../common/styles/colors"
+@import "../../../common/styles/shadow"
+
+@mixin flex-row-centered
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: center
+
+.pointer
+  cursor: pointer
+  &.userAvatarWrapper:hover
+    @include shadow-on-active
+
+.userAvatarWrapper
+  @include flex-row-centered
+  @include shadow
+  justify-content: center
+  border-radius: 50%
+  transition: box-shadow 0.2s ease-in-out
+  .loader
+    font-size: 26px
+    color: $accent-blue
+  .userAvatar
+    @include flex-row-centered
+    img
+      margin: 0
+      width: 90%
+      height: 90%
+      border-radius: 50%
+  .emptyAvatar
+    font-size: 21px
+    color: $accent-blue
+
+
+
