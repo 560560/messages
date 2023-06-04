@@ -1,15 +1,12 @@
-import { useCallback, useEffect, useMemo } from "react";
-import { useSelector } from "react-redux";
-import { isEqual, startsWith } from "lodash";
-import { useLocation } from "react-router-dom";
+import { useCallback, useEffect, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { isEqual, startsWith } from 'lodash';
+import { useLocation } from 'react-router-dom';
 
-import { getCurrentUserProfile } from "../../redux/reducers/authSlice";
-import { setCreateMessageMode } from "../../redux/reducers/messagesSlice";
-import { RootStore, useAppDispatch } from "../../redux/store";
-import {
-  RoutePath,
-  useNavigateHelpers,
-} from "../../common/hooks/useNavigateHelpers";
+import { getCurrentUserProfile } from '../../redux/reducers/authSlice';
+import { setCreateMessageMode } from '../../redux/reducers/messagesSlice';
+import { RootStore, useAppDispatch } from '../../redux/store';
+import { RoutePath, useNavigateHelpers } from '../../common/hooks/useNavigateHelpers';
 
 export const useHeader = () => {
   const dispatch = useAppDispatch();
@@ -21,13 +18,13 @@ export const useHeader = () => {
 
   const getHeaderTitle = useCallback(() => {
     if (startsWith(location.pathname, RoutePath.USER_PROFILE_PAGE)) {
-      return "User profile";
+      return 'User profile';
     } else if (isAllMessagesPage) {
-      return "All messages";
+      return 'All messages';
     } else {
-      return "Oops...";
+      return 'Oops...';
     }
-  }, [location, RoutePath, isAllMessagesPage]);
+  }, [location, isAllMessagesPage]);
 
   useEffect(() => {
     dispatch(getCurrentUserProfile());

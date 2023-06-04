@@ -18,7 +18,7 @@ export interface Message {
   text: string;
 }
 
-export interface ComposedMessage extends Omit<Message, "userId"> {
+export interface ComposedMessage extends Omit<Message, 'userId'> {
   user: User;
 }
 
@@ -27,7 +27,7 @@ export interface MessageListData {
   totalCount: number;
 }
 
-export interface MessageList extends Omit<MessageListData, "items"> {
+export interface MessageList extends Omit<MessageListData, 'items'> {
   items: ComposedMessage[];
   totalCount: number;
 }

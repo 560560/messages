@@ -1,30 +1,23 @@
-import React from "react";
-import { Divider, Empty, Input, List, Typography } from "antd";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { SearchOutlined } from "@ant-design/icons";
+import React, { CSSProperties } from 'react';
+import { Empty, Input, List, Typography } from 'antd';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { SearchOutlined } from '@ant-design/icons';
 
-import { AntSpinner } from "../common/AntSpinner/AntSpinner";
-import { TextInputModal } from "../common/TextInputModal";
-import { useMessages } from "./useMessages";
-import { MessageItem } from "./MessageItem";
+import { AntSpinner } from '../common/AntSpinner/AntSpinner';
+import { TextInputModal } from '../common/TextInputModal';
+import { useMessages } from './useMessages';
+import { MessageItem } from './MessageItem';
 
-import styles from "./styles.module.sass";
+import styles from './styles.module.sass';
+import { EndListMessage } from './EndListMessage';
 
+const style = { overflowY: 'hidden' } as CSSProperties;
+const locale = { emptyText: ' ' };
 const { Text } = Typography;
 
 const MessagesNotFound: React.FC = () => <Text>Messages not found</Text>;
 
-const EndListMessage: React.FC<{ isDividerHidden: boolean }> = ({
-  isDividerHidden,
-}) => {
-  if (isDividerHidden) {
-    return <></>;
-  } else {
-    return <Divider plain>It is all, nothing more messages 🤐</Divider>;
-  }
-};
-
-export const Messages: React.FC = () => {
+export const Messages = React.memo(() => {
   const {
     closeCreateMessageModal,
     isAllMessagesLoaded,
@@ -55,7 +48,7 @@ export const Messages: React.FC = () => {
 
           <div className={styles.messageList}>
             <InfiniteScroll
-              style={{ overflowY: "hidden" }}
+              style={style}
               dataLength={messages.length}
               next={nextPage}
               hasMore={!isAllMessagesLoaded}
@@ -63,15 +56,14 @@ export const Messages: React.FC = () => {
               endMessage={
                 <EndListMessage
                   isDividerHidden={
-                    (isAllMessagesLoaded && isMessagesLoading) ||
-                    isEmptyStateVisible
+                    (isAllMessagesLoaded && isMessagesLoading) || isEmptyStateVisible
                   }
                 />
               }
               scrollableTarget="scrollableDiv"
             >
               <List
-                locale={{ emptyText: " " }}
+                locale={locale}
                 dataSource={messages}
                 renderItem={(message) => (
                   <List.Item key={message.id}>
@@ -100,14 +92,14 @@ export const Messages: React.FC = () => {
 
       <TextInputModal
         closeModal={closeCreateMessageModal}
-        confirmButtonTitle={"Send"}
+        confirmButtonTitle={'Send'}
         isSubmitting={isMessageSending}
         onConfirm={onConfirmAddMessageModal}
         onTextChange={onChangeModalTextValue}
         textValue={newMessageTextValue}
-        title={"Sending new message"}
+        title={'Sending new message'}
         visible={isCreateMessageMode}
       />
     </>
   );
-};
+});

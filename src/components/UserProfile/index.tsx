@@ -1,20 +1,16 @@
-import React from "react";
-import { Empty, Typography } from "antd";
+import React from 'react';
+import { Empty } from 'antd';
 
-import { Messages } from "../Messages";
-import { UserAvatar } from "../common/UserAvatar";
-import { useUserProfile } from "./useUserProfile";
-import { AntSpinner } from "../common/AntSpinner/AntSpinner";
+import { Messages } from '../Messages';
+import { UserAvatar } from '../common/UserAvatar';
+import { useUserProfile } from './useUserProfile';
+import { AntSpinner } from '../common/AntSpinner/AntSpinner';
 
-import styles from "./styles.module.sass";
+import styles from './styles.module.sass';
+import { UserNotFound } from './UserNotFound';
 
-const { Text } = Typography;
-
-const UserNotFound: React.FC = () => <Text> User not found</Text>;
-
-export const UserProfile: React.FC = () => {
-  const { isEmptyStateVisible, isUserProfileLoading, userProfile } =
-    useUserProfile();
+export const UserProfile = React.memo(() => {
+  const { isEmptyStateVisible, isUserProfileLoading, userProfile } = useUserProfile();
 
   const isUserProfileVisible = !!userProfile;
 
@@ -45,4 +41,4 @@ export const UserProfile: React.FC = () => {
       )}
     </div>
   );
-};
+});

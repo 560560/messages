@@ -1,8 +1,8 @@
-import React from "react";
-import classNames from "classnames";
-import { LoadingOutlined, UserOutlined } from "@ant-design/icons";
+import React, { useMemo } from 'react';
+import classNames from 'classnames';
+import { LoadingOutlined, UserOutlined } from '@ant-design/icons';
 
-import styles from "./styles.module.sass";
+import styles from './styles.module.sass';
 
 interface UserAvatarProps {
   isLoading?: boolean;
@@ -12,33 +12,30 @@ interface UserAvatarProps {
   userAvatarUrl: string | undefined;
 }
 
-export const UserAvatar: React.FC<UserAvatarProps> = ({
-  isLoading,
-  onClick,
-  pointer,
-  size,
-  userAvatarUrl,
-}) => {
-  const isUserAvatarVisible = !isLoading && userAvatarUrl;
-  const isEmptyAvatarVisible = !isLoading && !Boolean(userAvatarUrl);
+export const UserAvatar = React.memo<UserAvatarProps>(
+  ({ isLoading, onClick, pointer, size, userAvatarUrl }) => {
+    const isEmptyAvatarVisible = !isLoading && !Boolean(userAvatarUrl);
+    const isUserAvatarVisible = !isLoading && Boolean(userAvatarUrl);
+    const style = useMemo(() => ({ width: size, height: size }), [size]);
 
-  return (
-    <div
-      className={classNames(styles.userAvatarWrapper, {
-        [styles.pointer]: pointer,
-      })}
-      style={{ width: size, height: size }}
-      onClick={onClick}
-    >
-      {isLoading && <LoadingOutlined className={styles.loader} />}
+    return (
+      <div
+        className={classNames(styles.userAvatarWrapper, {
+          [styles.pointer]: pointer,
+        })}
+        style={style}
+        onClick={onClick}
+      >
+        {isLoading && <LoadingOutlined className={styles.loader} />}
 
-      {isUserAvatarVisible && (
-        <div className={styles.userAvatar}>
-          <img src={userAvatarUrl} alt="Avatar" />
-        </div>
-      )}
+        {isUserAvatarVisible && (
+          <div className={styles.userAvatar}>
+            <img src={userAvatarUrl} alt="Avatar" />
+          </div>
+        )}
 
-      {isEmptyAvatarVisible && <UserOutlined className={styles.emptyAvatar} />}
-    </div>
-  );
-};
+        {isEmptyAvatarVisible && <UserOutlined className={styles.emptyAvatar} />}
+      </div>
+    );
+  }
+);

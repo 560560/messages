@@ -1,14 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Button } from "antd";
-import { LeftCircleTwoTone, PlusOutlined } from "@ant-design/icons";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from 'antd';
+import { LeftCircleTwoTone, PlusOutlined } from '@ant-design/icons';
 
-import { useHeader } from "./useHeader";
-import { UserAvatar } from "../common/UserAvatar";
+import { useHeader } from './useHeader';
+import { UserAvatar } from '../common/UserAvatar';
 
-import styles from "./styles.module.sass";
+import styles from './styles.module.sass';
 
-export const Header: React.FC = () => {
+export const Header = React.memo(() => {
   const {
     headerTitle,
     isBackToMessageVisible,
@@ -39,9 +39,9 @@ export const Header: React.FC = () => {
           <Button
             icon={<PlusOutlined />}
             onClick={openCreateMessageModal}
-            type={"primary"}
+            type={'primary'}
+            shape={'round'}
             ghost
-            shape={"round"}
           >
             Add message
           </Button>
@@ -57,4 +57,4 @@ export const Header: React.FC = () => {
       </div>
     </div>
   );
-};
+});

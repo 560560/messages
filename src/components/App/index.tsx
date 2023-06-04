@@ -1,12 +1,12 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-import { Header } from "../Header";
-import { Messages } from "../Messages";
-import { UserProfile } from "../UserProfile";
-import { Oops } from "../common/Oops";
+import { Header } from '../Header';
+import { Messages } from '../Messages';
+import { UserProfile } from '../UserProfile';
+import { Oops } from '../common/Oops';
 
-import styles from "./styles.module.sass";
+import styles from './styles.module.sass';
 
 export const App: React.FC = () => {
   return (
